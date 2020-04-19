@@ -6,6 +6,7 @@ from urandom import randint
 
 class Ball:
     def __init__(self,x,y,r):
+        # 初始化位置及球体大小
         self.x = x
         self.y = y
         self.r = r
@@ -16,6 +17,7 @@ class Ball:
         self.old_y = y
         self.color = randint(0,16579836)
     def update(self):
+        # 保存旧参数
         self.old_x = self.x
         self.old_y = self.y
         # if self.x+self.vx - self.r<0:
@@ -34,13 +36,16 @@ class Ball:
         # else:
         #     self.y = 160
         #     self.vy = -self.vy
+        # 更新位置
         self.x = self.x + self.vx
         self.y = self.y + self.vy
+        # 边界碰撞检测
         if self.x - self.r <= 0 or self.x + self.r > 80:
             self.vx = -self.vx
         if self.y - self.r <= 0 or self.y + self.r > 160:
             self.vy = -self.vy
     def render(self):
+        # 绘制图像
         self.clear()
         lcd.setColor(self.color)
         lcd.fillCircle(self.x, self.y, self.r)
@@ -48,6 +53,7 @@ class Ball:
         self.old_x = self.x
         self.old_y = self.y
     def clear(self):
+        # 清空上一帧内容
         lcd.setColor(lcd.BLACK)
         lcd.fillCircle(self.old_x, self.old_y, self.r)
 
